@@ -27,17 +27,17 @@ for x,y in events_df.iterrows():
         When:
         {y.Time_start.strftime('%d-%b-%Y %H:%M')}
 
-        Event link: {y.Link}"""
+        Event link: {y.Link}
+
+        """
 
     if y["Time_start"].date() == datetime.today().date():
-        events_today += "*Events today: * "
         events_today += str_ms
 
     elif y["Time_start"].date() < in_a_week.date():
-        events_this_w += "*Events this week:* "
         events_this_w += str_ms
 
-final_msg = events_today + "\n\n\n" + events_this_w if events_today else events_this_w
+final_msg = "*Events today:* " + events_today + "\n\n\n----------------\n *Events this week:* " + events_this_w if events_today else "*Events this week:* \n\n" + events_this_w
 
 if __name__ == "__main__":
     telegram_bot_sendtext(final_msg)
